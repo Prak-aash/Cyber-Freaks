@@ -207,7 +207,7 @@
                 <h2 class="section-title">Contact</h2>
 
                 <div class="contact__container bd-grid">
-                    <form class="contact__form">
+                    <form action="" class="contact__form">
                         <input type="text" placeholder="Name" class="contact__input" required>
                         <input type="mail" placeholder="Email" class="contact__input" required>
                         <textarea placeholder="Your Feedback" id="" cols="0" rows="10" class="contact__input" required></textarea>
@@ -252,20 +252,20 @@
             appId: "1:351212736374:web:489932308a06b08435f457"
           };
           firebase.initializeApp(firebaseConfig);
-        
-          const database = firebase.database();
 
-  // Get references to form elements
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const feedbackInput = document.getElementById('feedback');
-  const submitButton = document.getElementById('submitButton');
+              const database = firebase.database();
 
-  // Handle form submission
-  submitButton.addEventListener('click', () => {
-    const name = nameInput.value;
-    const email = emailInput.value;
-    const feedback = feedbackInput.value;
+  // Get the form element
+  const contactForm = document.getElementById('contact-form');
+
+  // Listen for form submission
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    // Get values from the form
+    const name = contactForm.querySelector('input[type="text"]').value;
+    const email = contactForm.querySelector('input[type="email"]').value;
+    const feedback = contactForm.querySelector('#feedback').value;
 
     // Push the data to Firebase
     const feedbackRef = database.ref('feedbacks');
@@ -276,9 +276,7 @@
     });
 
     // Clear form inputs
-    nameInput.value = '';
-    emailInput.value = '';
-    feedbackInput.value = '';
+    contactForm.reset();
 
     alert('Feedback submitted successfully!');
   });
