@@ -235,6 +235,57 @@
         <!--===== MAIN JS =====-->
         <script src="assets/js/main.js"></script>
 
+        <!-- Add this script after your Firebase configuration script -->
+
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+        
+        <script>
+          // Initialize Firebase with your config
+          const firebaseConfig = {
+            apiKey: "AIzaSyChghn2UlNK5IbrF1dRBx5nHrHalltnGfQ",
+            authDomain: "cyber-freaks.firebaseapp.com",
+            databaseURL: "https://cyber-freaks-default-rtdb.firebaseio.com",
+            projectId: "cyber-freaks",
+            storageBucket: "cyber-freaks.appspot.com",
+            messagingSenderId: "351212736374",
+            appId: "1:351212736374:web:489932308a06b08435f457"
+          };
+          firebase.initializeApp(firebaseConfig);
+        
+          // Reference to your Firebase Realtime Database
+          const database = firebase.database();
+        
+          // Get references to form inputs and button
+          const nameInput = document.querySelector('.contact__input[placeholder="Name"]');
+          const emailInput = document.querySelector('.contact__input[placeholder="Email"]');
+          const feedbackInput = document.querySelector('.contact__input[placeholder="Your Feedback"]');
+          const contactButton = document.querySelector('.contact__button');
+        
+          // Handle form submission
+          contactButton.addEventListener('click', () => {
+            const name = nameInput.value;
+            const email = emailInput.value;
+            const feedback = feedbackInput.value;
+        
+            // Push the data to Firebase
+            const feedbackRef = database.ref('feedbacks');
+            feedbackRef.push({
+              name: name,
+              email: email,
+              feedback: feedback
+            });
+        
+            // Clear form inputs
+            nameInput.value = '';
+            emailInput.value = '';
+            feedbackInput.value = '';
+        
+            alert('Feedback submitted successfully!');
+          });
+        </script>
+
+
         <!--===== SCROLL REVEAL =====-->
         <script src="https://unpkg.com/scrollreveal"></script>
         
