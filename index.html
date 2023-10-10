@@ -211,7 +211,7 @@
                         <input type="text" placeholder="Name" class="contact__input" required>
                         <input type="mail" placeholder="Email" class="contact__input" required>
                         <textarea placeholder="Your Feedback" id="" cols="0" rows="10" class="contact__input" required></textarea>
-                        <input type="submit" value="Contact" class="contact__button button">
+                        <input type="submit" value="Contact" class="contact__button button" id="submitButton">
                     </form>
                 </div>
             </section>
@@ -253,36 +253,35 @@
           };
           firebase.initializeApp(firebaseConfig);
         
-          // Reference to your Firebase Realtime Database
           const database = firebase.database();
-        
-          // Get references to form inputs and button
-          const nameInput = document.querySelector('.contact__input[placeholder="Name"]');
-          const emailInput = document.querySelector('.contact__input[placeholder="Email"]');
-          const feedbackInput = document.querySelector('.contact__input[placeholder="Your Feedback"]');
-          const contactButton = document.querySelector('.contact__button');
-        
-          // Handle form submission
-          contactButton.addEventListener('click', () => {
-            const name = nameInput.value;
-            const email = emailInput.value;
-            const feedback = feedbackInput.value;
-        
-            // Push the data to Firebase
-            const feedbackRef = database.ref('feedbacks');
-            feedbackRef.push({
-              name: name,
-              email: email,
-              feedback: feedback
-            });
-        
-            // Clear form inputs
-            nameInput.value = '';
-            emailInput.value = '';
-            feedbackInput.value = '';
-        
-            alert('Feedback submitted successfully!');
-          });
+
+  // Get references to form elements
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const feedbackInput = document.getElementById('feedback');
+  const submitButton = document.getElementById('submitButton');
+
+  // Handle form submission
+  submitButton.addEventListener('click', () => {
+    const name = nameInput.value;
+    const email = emailInput.value;
+    const feedback = feedbackInput.value;
+
+    // Push the data to Firebase
+    const feedbackRef = database.ref('feedbacks');
+    feedbackRef.push({
+      name: name,
+      email: email,
+      feedback: feedback
+    });
+
+    // Clear form inputs
+    nameInput.value = '';
+    emailInput.value = '';
+    feedbackInput.value = '';
+
+    alert('Feedback submitted successfully!');
+  });
         </script>
 
 
