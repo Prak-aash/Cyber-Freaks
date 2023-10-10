@@ -41,18 +41,28 @@ function scrollActive(){
 }
 window.addEventListener('scroll', scrollActive)
 
-
 const counters = document.querySelectorAll(".counter");
 counters.forEach((counter) => {
-counter.innerText = "0";
-const updateCounter = () => {
+  counter.innerText = "0";
+  const updateCounter = () => {
     const target = +counter.getAttribute("data-target");
     const count = +counter.innerText;
     const increment = target / 200;
     if (count < target) {
-    counter.innerText = `${Math.ceil(count + increment)}`;
-    setTimeout(updateCounter, 1);
-    } else counter.innerText = target;
-};
-updateCounter();
+      counter.innerText = `${Math.ceil(count + increment)}`;
+      setTimeout(updateCounter, 50);
+    } else {
+      counter.innerText = target;
+    }
+  };
+  updateCounter();
 });
+
+
+window.sr = new ScrollReveal()
+    sr.reveal('#header', { origin: 'top', distance: '20px', duration: 2000,  reset: true })
+    sr.reveal('#home', { origin: 'top', distance: '20px', duration: 2000,  reset: true })
+    sr.reveal('#about', { origin: 'top', distance: '20px', duration: 2000,  reset: true })
+    sr.reveal('#work', { origin: 'top', distance: '20px', duration: 2000,  reset: true })
+    sr.reveal('#contact', { origin: 'top', distance: '20px', duration: 2000,  reset: true })
+    sr.reveal('#footer', { origin: 'top', distance: '20px', duration: 2000,  reset: true })
