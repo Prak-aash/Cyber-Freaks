@@ -207,7 +207,7 @@
                 <h2 class="section-title">Contact</h2>
 
                 <div class="contact__container bd-grid">
-                    <form action="" class="contact__form" onsubmit="uploadData(); return false;">
+                    <form action="" class="contact__form" onsubmit="return validateForm()">
                         <input type="text" placeholder="Name" class="contact__input" required>
                         <input type="mail" placeholder="Email" class="contact__input" required>
                         <textarea placeholder="Your Feedback" id="" cols="0" rows="10" class="contact__input" required></textarea>
@@ -255,10 +255,15 @@
 
           const database = firebase.database();
 
-function uploadData() {
+            function validateForm() {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const feedback = document.getElementById('feedback').value;
+
+    if (name === '' || email === '' || feedback === '') {
+      alert('Please fill in all fields.');
+      return false;
+    }
 
     // Push the data to Firebase
     const feedbackRef = database.ref('feedbacks');
@@ -274,7 +279,8 @@ function uploadData() {
     document.getElementById('feedback').value = '';
 
     alert('Feedback submitted successfully!');
-               }
+    return true;
+            }
         </script>
 
 
