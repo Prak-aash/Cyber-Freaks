@@ -207,11 +207,11 @@
                 <h2 class="section-title">Contact</h2>
 
                 <div class="contact__container bd-grid">
-                    <form action="" class="contact__form" onsubmit="uploadData();">
-                        <input type="text" placeholder="Name" class="contact__input" required>
-                        <input type="mail" placeholder="Email" class="contact__input" required>
-                        <textarea placeholder="Your Feedback" id="" cols="0" rows="10" class="contact__input" required></textarea>
-                        <input type="submit" value="Contact" class="contact__button button" id="submitButton">
+                    <form action="" class="contact__form" id="contact-form">
+                        <input type="text" placeholder="Name" class="contact__input" id="name" required>
+                        <input type="email" placeholder="Email" class="contact__input" id="email" required>
+                        <textarea placeholder="Your Feedback" id="feedback" cols="0" rows="10" class="contact__input" required></textarea>
+                        <input type="submit" value="Contact" class="contact__button button">
                     </form>
                 </div>
             </section>
@@ -254,27 +254,28 @@
           firebase.initializeApp(firebaseConfig);
 
           const database = firebase.database();
-
-              function uploadData() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const feedback = document.getElementById('feedback').value;
-
-    // Push the data to Firebase
-    const feedbackRef = database.ref('feedbacks');
-    feedbackRef.push({
-      name: name,
-      email: email,
-      feedback: feedback
-    });
-
-    // Clear form inputs
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('feedback').value = '';
-
-    alert('Feedback submitted successfully!');
-              }
+          document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
+        
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const feedback = document.getElementById('feedback').value;
+        
+            // Push the data to Firebase
+            const feedbackRef = database.ref('feedbacks');
+            feedbackRef.push({
+              name: name,
+              email: email,
+              feedback: feedback
+            });
+        
+            // Clear form inputs
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('feedback').value = '';
+        
+            alert('Feedback submitted successfully!');
+          });
         </script>
 
 
