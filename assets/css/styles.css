@@ -229,7 +229,7 @@ img {
 
 .home__title {
   font-size: var(--big-font-size);
-  margin-bottom: var(--mb-4);
+  margin-bottom: var(--mb-2);
   line-height: 3rem;
 }
 
@@ -311,24 +311,59 @@ img {
   border-radius: 50%;
 }
 
-/* ===== WORK =====*/
-.work__container {
-  row-gap: 2rem;
-}
-
-.work__img {
-  box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
-  border-radius: .5rem;
+/*===== WORK MARQUEE =====*/
+.work__marquee {
   overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
 }
 
-.work__img img {
-  transition: 1s;
+.work__track {
+  display: flex;
+  gap: 30px; /* Space between images */
+  animation: marquee 50s linear infinite; /* Infinite scrolling effect */
+  width: max-content;
 }
 
-.work__img img:hover {
-  transform: scale(1.1);
+/* Images styling */
+.work__image {
+  width: 35rem; /* Adjust size to make the images bigger */
+  height: auto;
+  border-radius: 8px;
 }
+
+/* Keyframe animation for scrolling */
+@keyframes marquee {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+/* Ensure the images loop smoothly */
+.work__track::after {
+  content: "";
+  display: flex;
+  gap: 30px;
+  animation: marquee 50s linear infinite;
+  width: max-content;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+  .work__image {
+      width: 20rem;
+  }
+}
+
+/* Pause animation on hover */
+.work__marquee:hover .work__track {
+  animation-play-state: paused;
+}
+
 
 /* ===== CONTACT =====*/
 .contact__input {
@@ -354,7 +389,7 @@ img {
 
 /* ===== FOOTER =====*/
 .footer {
-  background-color: var(--first-color);
+  /* background-color: var(--first-color); */
   color: #0A1931;
   text-align: center;
   font-weight: var(--font-semi);
