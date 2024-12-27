@@ -1,7 +1,4 @@
 # **Cyber-Freaks**
-A CyberSec Startup
-We are safe on the cyber world and we are helping others to be safe too. 
-We learn, teach and experiment together. 
-Together we are safer than ever
+A CyberSec Startup Committed To Ensuring Safety In The Digital World. We Learn, Teach, And Experiment To Enhance Security. Together, We're Making The Cyber World A Safer Place For Everyone.
 
 **Preview:** https://cyber-freaks.netlify.app
